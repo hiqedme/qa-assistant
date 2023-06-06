@@ -22,8 +22,8 @@ const Login = () => {
       setError(result);
     } else {
       setIsLoading(false);
-      navigate('/');
       localStorage.setItem('authenticated', 'true');
+      navigate('/');
     }
   };
 
@@ -113,4 +113,5 @@ const Login = () => {
     </section>
   );
 };
+
 export default Login;
