@@ -47,18 +47,28 @@ const CsvUpload = () => {
               );
             // Check if the file contains the columns "Lab Viral Load" or "CD4_Count"
             console.log(headers.includes('"CD4 abs"'));
+            console.log('headers:', headers);
             let file_type = '';
             if (headers.includes('Lab Viral Load') && fileType === 'VL') {
               file_type = 'VL';
-            } else if (headers.includes('"CD4 abs"') && fileType === 'CD4') {
+            } else if (headers.includes('CD4 abs') && fileType === 'CD4') {
               file_type = 'CD4';
-            } else if (!headers.includes('Lab Viral Load') && !headers.includes('"CD4 abs"')) {
+            } else if (headers.includes('Target 1') && fileType === 'HPV') {
+              file_type = 'CD4';
+            } else if (
+              !headers.includes('Lab Viral Load') ||
+              !headers.includes('CD4 abs') ||
+              !headers.includes('Target 1')
+            ) {
               toast.error('File does not contain the required columns');
               return reject();
             } else if (headers.includes('Lab Viral Load') && fileType !== 'VL') {
               toast.error('File selected is not a CD4 file');
               return reject();
             } else if (headers.includes('"CD4 abs"') && fileType !== 'CD4') {
+              toast.error('File selected is not a VL file');
+              return reject();
+            } else if (headers.includes('Target 1') && fileType !== 'HPV') {
               toast.error('File selected is not a VL file');
               return reject();
             } else if (fileType === '') {
@@ -206,6 +216,7 @@ const CsvUpload = () => {
                   <option value="">file type:</option>
                   <option value="VL">VL</option>
                   <option value="CD4">CD4</option>
+                  <option value="HPV">HPV</option>
                 </select>
                 <button className="bg-blue-500 p-3 rounded-lg text-white" onClick={onClickCsvUploadHandler}>
                   Upload CSV

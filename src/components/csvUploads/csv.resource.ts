@@ -19,7 +19,7 @@ export const uploadCsvFile = async (data: CsvUploadData) => {
   formData.append('file_type', data.file_type);
   formData.append('total_records', data.total_records.toString());
 
-  const response = await fetch('/csv/uploads', {
+  const response = await fetch('/api/csv/uploads', {
     method: 'POST',
     body: formData,
   });
@@ -28,7 +28,7 @@ export const uploadCsvFile = async (data: CsvUploadData) => {
 
 export const getCsvFiles = async (logged_user: string) => {
   try {
-    const response = await fetch(`/csv/uploads?logged_user=${logged_user}`);
+    const response = await fetch(`/api/csv/uploads?logged_user=${logged_user}`);
     if (response.ok) {
       return response;
     }
@@ -40,7 +40,7 @@ export const getCsvFiles = async (logged_user: string) => {
 // void 1 on delete
 export const deleteCsvFile = async (id: number) => {
   // put id from the body
-  const response = await fetch('/csv/uploads', {
+  const response = await fetch('/api/csv/uploads', {
     method: 'PUT',
     body: JSON.stringify(id),
   });
@@ -49,7 +49,7 @@ export const deleteCsvFile = async (id: number) => {
 
 // sync data
 export const syncCsvFile = async (path: string) => {
-  const response = await fetch('/push/csvs', {
+  const response = await fetch('/api/push/csvs', {
     method: 'POST',
     body: path,
   });
@@ -58,7 +58,7 @@ export const syncCsvFile = async (path: string) => {
 
 // fetch error logs
 export const getErrorLogs = async (fileName: string) => {
-  const response = await fetch(`/csv/logs?file_name=${fileName}`);
+  const response = await fetch(`/api/csv/logs?file_name=${fileName}`);
   if (response.ok) {
     return response;
   }
