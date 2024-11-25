@@ -10,8 +10,10 @@ export default defineConfig({
       //   changeOrigin: true,
       //   secure: false,
       // },
+
       '/api': {
-        target: 'http://127.0.0.1:3011',
+        // target: 'http://Admins-MacBook-Pro.local:3012',
+        target: 'http://127.0.0.1:3012',
         changeOrigin: true,
         secure: false,
       },

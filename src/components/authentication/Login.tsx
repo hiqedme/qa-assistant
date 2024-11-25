@@ -17,6 +17,7 @@ const Login = () => {
   const handleLogin = async () => {
     setIsLoading(true);
     const result = await AuthenticationResource(username, password);
+    console.log('res', result);
     if (result) {
       setIsLoading(false);
       setError(result);

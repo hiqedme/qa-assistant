@@ -5,7 +5,8 @@ const AuthenticationResource = async (username: string, password: string) => {
     error: '',
   };
   if (username.trim().length !== 0 && password.trim().length !== 0) {
-    const result = await fetch(`https://ngx.ampath.or.ke/amrs/ws/rest/v1/session`, {
+    const result = await fetch(`https://ngx.ampath.or.ke/amrs/ws/rest/v1/session`,{
+    
       headers: {
         Authorization: 'Basic ' + btoa(username + ':' + password),
       },
